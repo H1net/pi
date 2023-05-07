@@ -1,0 +1,15 @@
+#---- Create key on client ----#
+ssh-keygen -b 2048 -t rsa
+
+#---- Validate creation ----#
+ls ~/.ssh
+
+#---- SSH to Pi and create the SSH directory and file ----#
+mkdir .ssh
+cd .ssh
+touch authorized_keys
+chmod 700 ~/.ssh/
+chmod 600 ~/.ssh/authorized_keys
+
+#---- From your client, copy your key to Pi ----#
+cat ~/.ssh/id_rsa.pub | ssh pi@192.168.1.2 'cat >>.ssh/authorized_keys'
